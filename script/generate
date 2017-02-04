@@ -1,0 +1,83 @@
+#!/bin/bash
+# This script create new QuickJava project into workspace
+# (C) 2012 - Emanuele Paiano nixw0rm@gmail.com
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. $dir/../conf/config.cfg
+
+function use 
+{
+ echo 'QuickJava - Create a new project into workspace'
+ echo 'sintax: $1 <project_name>'
+ exit
+}
+
+function createProject
+{
+ mkdir $WORKSPACE/$1
+ mkdir $WORKSPACE/$1/jsrc
+ mkdir $WORKSPACE/$1/doc
+ mkdir $WORKSPACE/$1/build
+ touch $WORKSPACE/$1/main.java
+ echo -n "Creating main.java.."
+ if [ -r $WORKSPACE/$1/main.java ]
+ then
+ 	echo "OK"
+ else
+	echo -e "\nError creating main.java.\nTry to launch update-env from quickjava directory"
+	exit
+ fi
+ echo 'void main(String[] args)'>$WORKSPACE/$1/main.java
+ echo '{' >>$WORKSPACE/$1/main.java
+ echo " /* Insert QuickJava code here */" >> $WORKSPACE/$1/main.java
+ echo "}" >> $WORKSPACE/$1/main.java
+ echo -n "Generating Makefile.."
+ if [ -r $dir/../conf/make.hd ]
+ then
+ 	echo "OK"
+ else
+	echo -e "\nError while creating Makefile.\nTry to launch update-env from quickjava directory"
+	exit
+ fi
+ cat $dir/../conf/make.hd > $WORKSPACE/$1/Makefile
+ echo "PRJNAME=$1" >> $WORKSPACE/$1/Makefile
+ echo "JSRC=$WORKSPACE/$1/jsrc" >> $WORKSPACE/$1/Makefile
+ echo "SRC=\$(JSRC)" >> $WORKSPACE/$1/Makefile
+ cat $dir/../conf/make.bd >> $WORKSPACE/$1/Makefile
+ if [ -r $WORKSPACE/$1/Makefile ]
+ then
+ 	echo "Makefile found"
+ else
+	echo -e "\nError while creating Makefile.\nTry to launch update-env from quickjava directory"
+	exit
+ fi
+ if [ -r $WORKSPACE/$1 ]
+ then
+ 	echo "Project $1 created into directory $WORKSPACE"
+ else
+	echo "error while creating project"
+	exit
+ fi
+}
+
+function exists
+{
+ echo 'This project already exists. Abort'
+ exit
+}
+
+if [ $# == 0 ]
+then
+	use $0
+else
+	if [ -r $WORKSPACE/$1 ]
+	then
+		exists
+	else
+		createProject $1
+		$dir/loadlib $1
+	fi
+
+fi
+

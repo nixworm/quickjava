@@ -1,0 +1,44 @@
+#!/bin/bash
+# This script create new QuickJava project into workspace
+# (C) 2012 - Emanuele Paiano nixw0rm@gmail.com
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+lib=$dir/../lib
+
+. $dir/../conf/global.cfg
+
+. $dir/../conf/config.cfg
+
+function use 
+{
+ echo 'QuickJava - copy libs into project folder'
+ echo 'sintax: $1 <project_name>'
+ exit
+}
+
+function loadLib
+{
+ echo -n "Copying libs to $WORKSPACE/$1/lib/ ..."
+ cp $lib/*.java $WORKSPACE/$1/jsrc/
+ echo "OK"
+}
+
+function nexists
+{
+ echo 'This project does not exists. Abort'
+ exit
+}
+
+if [ $# == 0 ]
+then
+	use $0
+else
+	if [ -r $WORKSPACE/$1 ]
+	then
+		loadLib $1
+	else
+		nexists
+	fi
+
+fi
+

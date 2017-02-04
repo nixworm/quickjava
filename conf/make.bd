@@ -1,0 +1,97 @@
+
+# Quickjava preprocessor path
+JTINY_PATH=builder/
+
+# Quickjava preprocessor bin
+JTINY=$(JTINY_PATH)jtiny.jar
+
+# Java Compiler
+JAVAC=$(JDK_PATH)javac
+
+# Jar Generator
+JAR=$(JAR_PATH)jar
+
+# JVM BIN
+JAVA=$(JRE_PATH)java
+
+BIN=$(WORKSPACE)/$(PRJ)/build/
+
+SRC= $(WORKSPACE)/$(PRJ)/jsrc/
+
+# Output jar path.
+OUTPUT=$(BIN)Main.jar
+
+all: main
+
+main: clean
+	@echo -n 'Creating Java code from quickjava sources..'
+	@$(JAVA) -jar $(JTINY) main.java $(WORKSPACE)/$(PRJ)/ > $(WORKSPACE)/$(PRJ)/jsrc/MainTmp.java
+	@$(FPATH)astyle < $(SRC)/MainTmp.java > $(SRC)/Main.java
+	@rm -f $(SRC)/MainTmp.java
+	@echo 'OK'
+	@echo -n 'Creating class files..'
+	@$(JAVAC) $(SRC)/*.java -d $(BIN)/
+	@echo 'OK'
+	@echo -n 'Creating jar files..'
+	@cp $(BIN)/*.class ./
+	@cat $(JTINY_PATH)/manifest.mf > manifest.mf
+	@echo "Class-Path: ./" >>  ./manifest.mf
+	@$(JAR) -cmf manifest.mf $(OUTPUT) *.class
+	@echo 'OK'
+	@echo -n 'Removing old class files..'
+	@rm -f *.class
+	@rm -f manifest.mf
+	@echo 'OK'  
+
+clean:
+ifneq ($(PRJ),)
+	@echo -n 'Removing old jar files..'
+	@rm -f $(OUTPUT)
+	@echo 'OK'
+	@echo -n 'Removing old class files..'
+	@rm -f $(BIN)/*.class
+	@echo 'OK'
+	@echo -n 'Removing old java files..'
+	@rm -f $(SRC)/Main.java
+	@echo 'OK'
+else
+	@echo "SINTAX ERROR: You must specify project with PRJ=<project_name>!"
+	@exit 1
+endif
+
+run: main
+	@echo -e 'Running..\n'
+	@$(JAVA) -jar $(OUTPUT) $(PARAMS)
+	@echo -e 'QuickJava program terminated successfully.'
+	
+new:
+	@script/create $(PRJ)
+	
+delete:
+	@rm -Rf $(WORKSPACE)/$(PRJ)
+
+list:
+	@echo '-----------------------'
+	@echo "Project into workspace"
+	@echo '-----------------------'
+	@echo ''
+	@ls $(WORKSPACE)
+
+help:
+	# Use: # make <command> PRJ=<project_name>
+	# commands list:
+	#
+	# help: this help
+	#
+	# remove build and clean source project_name
+	#
+	# run [PARAMS=parametres]: compile and run jar package with 
+	#					parametres from project_name
+	#
+	# all: compile project_name but don't run jar file
+	#
+	# new: create new project with name project_name inside workspace
+	#
+	# delete: remove project project_name from workspace
+	#
+	# list: lists all projects into workspace

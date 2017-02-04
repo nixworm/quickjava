@@ -1,0 +1,34 @@
+#!/bin/bash
+# This script create Makefile project into workspace
+# (C) 2012 - Emanuele Paiano nixw0rm@gmail.com
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. $dir/../conf/config.cfg
+
+function createMk
+{
+ echo -n "Generating Makefile.."
+ if [ -r $dir/../conf/make.hd ]
+ then
+ 	echo "OK"
+ else
+	echo -e "\nError while creating Makefile.\nTry to launch update-env from quickjava directory"
+	exit
+ fi
+ cat $dir/../conf/make.hd > $qjroot/Makefile
+ echo "JSRC=$WORKSPACE/$1/jsrc" >> $qjroot/Makefile
+ cat $dir/../conf/make.bd >> $qjroot/Makefile
+ if [ -r $qjroot/Makefile ]
+ then
+ 	echo "Makefile found"
+ else
+	echo -e "\nError while creating Makefile.\nTry to launch update-env from quickjava directory"
+	exit
+ fi
+
+}
+
+
+createMk
+

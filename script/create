@@ -1,0 +1,59 @@
+#!/bin/bash
+# This script create new QuickJava project into workspace
+# (C) 2012 - Emanuele Paiano nixw0rm@gmail.com
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. $dir/../conf/config.cfg
+
+function use 
+{
+ echo 'QuickJava - Create a new project into workspace'
+ echo 'sintax: $1 <project_name>'
+ exit
+}
+
+function createProject
+{
+ mkdir $WORKSPACE/$1
+ mkdir $WORKSPACE/$1/jsrc
+ mkdir $WORKSPACE/$1/doc
+ mkdir $WORKSPACE/$1/build
+ touch $WORKSPACE/$1/main.java
+ echo -n "Creating main.java.."
+ if [ -r $WORKSPACE/$1/main.java ]
+ then
+ 	echo "OK"
+ else
+	echo -e "\nError creating main.java.\nTry to launch update-env from quickjava directory"
+	exit
+ fi
+ echo 'void main(String[] args)'>$WORKSPACE/$1/main.java
+ echo '{' >>$WORKSPACE/$1/main.java
+ echo " /* Insert QuickJava code here */" >> $WORKSPACE/$1/main.java
+ echo "}" >> $WORKSPACE/$1/main.java
+ $dir/createmk $1
+ if [ -r $WORKSPACE/$1 ]
+ then
+ 	echo "Project $1 created into directory $WORKSPACE"
+ else
+	echo "error while creating project"
+	exit
+ fi
+}
+
+
+if [ $# == 0 ]
+then
+	use $0
+else
+	if [ -r $WORKSPACE/$1 ]
+	then
+		exists
+	else
+		createProject $1
+		$dir/loadlib $1
+	fi
+
+fi
+
