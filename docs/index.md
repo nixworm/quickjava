@@ -2,11 +2,11 @@
 </head>
 <body>
     <section class="content">
-        <header>
+        
      
-        </header>
+     
        
-<a id="user-content-quickjava" class="anchor" href="#quickjava" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>QuickJava</h1>
+<h1><a id="user-content-quickjava" class="anchor" href="#quickjava" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>QuickJava</h1>
 
 <p>0) INTRODUCTION</p>
 
