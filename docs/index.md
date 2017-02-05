@@ -37,7 +37,7 @@ java following next istructions:
        (in more linux distros you can install openjdk from a package manager)
 
 2.1.2) Run chmod update-env and run the script to configure:
-<code>
+<pre>
        user@hostname ~/quickjava $ chmod +x update-env
 
        user@hostname ~/quickjava $ ./update-env
@@ -45,7 +45,7 @@ java following next istructions:
        Created conf/make.hd
        Generating Makefile..OK
        Makefile found
-</code>       
+</pre>       
 Everything should be ready to start now. 
 
 
