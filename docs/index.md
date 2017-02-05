@@ -68,14 +68,15 @@ java following next instructions:</p>
 
 <p>2.1.2) Run chmod update-env and run the script to configure:</p>
 
-<pre>  <code>
-       user@hostname ~/quickjava $ chmod +x update-env
-       user@hostname ~/quickjava $ ./update-env
-       Created conf/global.cfg
-       Created conf/make.hd
-       Generating Makefile..OK
-       Makefile found
-       </code></pre>       
+<pre>  
+<code>
+user@hostname ~/quickjava $ chmod +x update-env
+user@hostname ~/quickjava $ ./update-env
+Created conf/global.cfg
+Created conf/make.hd
+Generating Makefile..OK
+Makefile found
+</code></pre>       
 
 <p>Everything should be ready to start now. </p>
 
