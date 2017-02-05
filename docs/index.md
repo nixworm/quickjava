@@ -49,13 +49,13 @@ following next instructions:</p>
 <pre>  
 user@hostname ~/quickjava $ chmod +x update-env
 user@hostname ~/quickjava $ ./update-env
-Created conf/global.cfg
+Created conf/global.cfg for novice
 Created conf/make.hd
 Generating Makefile..OK
 Makefile found
 </pre>       
 
-<p>Everything should be ready to start now. </p>
+<p>Everything should be ready to create our projects. </p>
 
 <p>2.2) MICROSOFT WINDOWS: 
      NB: Cygwin doesn&#39;t work under NT4 and quickjava doesn&#39;t work without cygwin..
