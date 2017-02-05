@@ -3,7 +3,7 @@
 <body>
     <section class="content">
         <header>
-            <h1 id="gistid"><a href="http://github.com/nixworm/quickjava">quickjava</a> :: <a href="/quickjava">index</a></h1>
+     
         </header>
         <article id="gistbody" class="instapaper_body entry-content">
             <h1>
