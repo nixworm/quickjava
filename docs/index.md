@@ -1,6 +1,4 @@
------------------------------------
- QUICKJAVA v0.8.0 - STARTING GUIDE
------------------------------------
+# QuickJava
 
 0) INTRODUCTION
 
