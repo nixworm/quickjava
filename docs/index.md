@@ -39,7 +39,7 @@ java following next istructions:
        (in more linux distros you can install openjdk from a package manager)
 
 2.1.2) Run chmod update-env and run the script to configure:
-
+<code>
        user@hostname ~/quickjava $ chmod +x update-env
 
        user@hostname ~/quickjava $ ./update-env
@@ -47,9 +47,9 @@ java following next istructions:
        Created conf/make.hd
        Generating Makefile..OK
        Makefile found
+</code>       
+Everything should be ready to start now. 
 
-       Everything should be ready to start now. 
-       
 
 2.2) MICROSOFT WINDOWS: 
      NB: Cygwin doesn't work under NT4 and quickjava doesn't work without cygwin..
