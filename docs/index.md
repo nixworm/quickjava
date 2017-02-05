@@ -2,10 +2,7 @@
 </head>
 <body>
     <section class="content">
-        
-     
-     
-       
+   
 <h1><a id="user-content-quickjava" class="anchor" href="#quickjava" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>QuickJava</h1>
 
 <p>0) INTRODUCTION</p>
@@ -36,8 +33,8 @@ can be written in Quickjava and used every day without problem (console programs
 
 <p>2) INSTALLATION</p>
 
-<p>Once installed basic software (java compilers and make), you can install quick 
-java following next instructions:</p>
+<p>When installed dependencies (java compilers and make), you can install quickjava 
+following next instructions:</p>
 
 <p>2.1) GNU/LINUX - UNIX: 
      extract quickjava package to home directory</p>
@@ -50,14 +47,13 @@ java following next instructions:</p>
 <p>2.1.2) Run chmod update-env and run the script to configure:</p>
 
 <pre>  
-<code>
 user@hostname ~/quickjava $ chmod +x update-env
 user@hostname ~/quickjava $ ./update-env
 Created conf/global.cfg
 Created conf/make.hd
 Generating Makefile..OK
 Makefile found
-</code></pre>       
+</pre>       
 
 <p>Everything should be ready to start now. </p>
 
